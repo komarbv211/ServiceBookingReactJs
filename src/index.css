@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.Layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.HomeBagraund {
+  background-image: url(./assets/ServiceBookingBackground.png); 
+  background-size: cover; 
+  background-position: top center; 
+  background-repeat: no-repeat; 
+  min-height: 100vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(57, 102, 249); 
+  padding-top: 20px; 
+}
+
+.Layout .main {
+  flex-grow: 1;
+}
+#root {
+  padding: 0rem;
+}

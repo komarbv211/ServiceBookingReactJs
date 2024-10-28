@@ -4,6 +4,7 @@ import Layout from './components/Layout'
 import Home from './components/Home'
 import ServiceTable from './components/ServiceTable'
 import About from './components/About'
+import ServiceInfo from './components/ServiceInfo'
 function App() {
 
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="services" element={<ServiceTable />} />
+              <Route path="services/:id" element={<ServiceInfo />} />
               <Route path="about" element={<About />} />
           </Route>
         </Routes>

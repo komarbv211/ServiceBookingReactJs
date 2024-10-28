@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Space, Table, Tag, Button, message  } from 'antd';
+import { Space, Table, Tag, Button, message, Popconfirm } from 'antd';
 import axios from 'axios';
 import { DeleteFilled, EditFilled,} from '@ant-design/icons';
-
+import { Link } from 'react-router-dom';
 
 const ServiceTable = () => {
   const [data, setData] = useState([]);
@@ -40,7 +40,7 @@ const ServiceTable = () => {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        render: (text) => <a>{text}</a>,
+        render: (text, item) => <Link to={`/services/${item.id}`}>{text}</Link>,
     },
     {
         title: 'Description',
@@ -71,9 +71,18 @@ const ServiceTable = () => {
             <Button color="primary" variant="outlined">
                 <EditFilled/>
             </Button>
-            <Button color="danger" variant="outlined" onClick={() => handleDelete(record.id)}>
-                <DeleteFilled/>
-            </Button>
+            <Popconfirm
+              title="Delete the service"
+              description={`Are you sure to delete ${record.name}?`}
+              onConfirm={() => handleDelete(record.id)}
+              okText="Yes"
+              cancelText="No"
+              >
+              <Button color="danger" variant="outlined" >
+                  <DeleteFilled/>
+              </Button>
+            </Popconfirm>
+            
         </Space>
         ),
     },

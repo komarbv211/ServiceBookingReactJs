@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Space, Table, Tag, Button, message, Popconfirm } from 'antd';
 import axios from 'axios';
-import { DeleteFilled, EditFilled,} from '@ant-design/icons';
+import {AppstoreAddOutlined, DeleteFilled, EditFilled,} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const ServiceTable = () => {
@@ -87,7 +87,18 @@ const ServiceTable = () => {
         ),
     },
     ];
-  return <Table columns={columns} dataSource={data} rowKey="id" />;
+  return (
+    <>
+      <div>
+        <Link to="/services/create">
+            <Button type="primary" icon={<AppstoreAddOutlined />} style={{ marginBottom: '16px' }}>
+                Create New Service
+            </Button>
+        </Link>
+      </div>
+      <Table columns={columns} dataSource={data} rowKey="id" />
+    </>
+    )
 };
 
 export default ServiceTable;

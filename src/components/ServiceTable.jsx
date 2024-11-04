@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Space, Table, Tag, Button, message, Popconfirm } from 'antd';
 import axios from 'axios';
-import {AppstoreAddOutlined, DeleteFilled, EditFilled,} from '@ant-design/icons';
+import {AppstoreAddOutlined, DeleteFilled, EditFilled, LikeFilled} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { useLike } from '../context/LikeContext';
 
 const ServiceTable = () => {
   const [data, setData] = useState([]);
+  const { likedProducts, toggleLike } = useLike();
+  const isLiked = (product) => likedProducts.some((item) => item.id === product.id);
 
   useEffect(() => {
     axios.get('https://localhost:7204/api/Services/GetAll')
@@ -68,9 +71,17 @@ const ServiceTable = () => {
         key: 'action',
         render: (_, record) => (
         <Space size="middle">
-            <Button color="primary" variant="outlined">
-                <EditFilled/>
+            <Button 
+              onClick={() => toggleLike(record)} 
+              style={{ color: isLiked(record) ? 'green' : 'black'}}>
+              <LikeFilled />
             </Button>
+            <Link to={`/services/update/${record.id}`}>
+              <Button color="primary" variant="outlined">
+                  <EditFilled />
+              </Button>
+            </Link>
+
             <Popconfirm
               title="Delete the service"
               description={`Are you sure to delete ${record.name}?`}

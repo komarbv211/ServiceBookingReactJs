@@ -6,11 +6,14 @@ import ServiceTable from './components/ServiceTable'
 import About from './components/About'
 import ServiceInfo from './components/ServiceInfo'
 import CreateService from './components/CreateService'
+import EditService from './components/EditService'
+import { LikeProvider } from './context/LikeContext';
+import FavoritesPage from './components/FavoritesPage'
 function App() {
 
   return (
     <>
-      {/* <Layout /> */}
+    <LikeProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -18,10 +21,13 @@ function App() {
               <Route path="services" element={<ServiceTable />} />
               <Route path="services/:id" element={<ServiceInfo />} />
               <Route path="/services/create" element={<CreateService />} />
+              <Route path="/services/update/:id" element={<EditService />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
               <Route path="about" element={<About />} />
           </Route>
         </Routes>
       </BrowserRouter>
+    </LikeProvider>
     </>
   )
 }
